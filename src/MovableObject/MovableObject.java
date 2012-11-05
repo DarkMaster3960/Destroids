@@ -1,5 +1,5 @@
 package MovableObject;
-// SVN Test
+// SVN Test trial
 public abstract class MovableObject {
 public void paint(){
 	
