@@ -25,8 +25,8 @@ public class Spaceship {
 	}
 
 	public void move(int aX, int aY) {
-		x = aX;
-		y = aY;
+		x = x + aX;
+		y = y + aY;
 	}
 
 	public void paint() {
