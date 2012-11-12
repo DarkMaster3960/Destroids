@@ -12,7 +12,9 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 	/**
 	 * 
 	 */
-
+	// Schalter für Spielvorhergang
+	boolean continuing;
+	
 	Image spielfeld;
 	Graphics spielGraphics;
 	long startTime, endTime;
@@ -20,6 +22,7 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 	Thread th;
 
 	public void init() {
+		continuing = true;
 		if (getWidth() == 0 || getWidth() == 0) {
 			setSize(1024, 768);
 		}
@@ -77,7 +80,7 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 	}
 
 	public void run() {
-		while (true) {
+		while (continuing) {
 			startTime = System.currentTimeMillis();
 			moveObjects();
 			updateScreen();
