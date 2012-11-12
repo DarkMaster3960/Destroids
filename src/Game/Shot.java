@@ -1,5 +1,7 @@
 package Game;
-//bla
+/**
+ * @author Maik
+ */
 public class Shot {
-
+	
 }
