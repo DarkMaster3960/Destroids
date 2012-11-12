@@ -14,7 +14,7 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 	 */
 	// Schalter für Spielvorhergang
 	boolean continuing;
-	
+
 	Image spielfeld;
 	Graphics spielGraphics;
 	long startTime, endTime;
@@ -44,13 +44,13 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 
 	public void keyPressed(KeyEvent e) {
 		Spaceship spaceship = ViewBean.getPlayer1();
-		if(e.getKeyCode() == KeyEvent.VK_UP) {
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			spaceship.move(0, -2);
-		}else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			spaceship.move(0, 2);
-		}else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			spaceship.move(-2, 0);
-		}else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			spaceship.move(+2, 0);
 		}
 	}
@@ -82,9 +82,13 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 	public void run() {
 		while (continuing) {
 			startTime = System.currentTimeMillis();
+			// 1. Move Objects to next Position
 			moveObjects();
+			// 2. Check collision
+			detectCollision();
+			// 3. Repaint the graphics
 			updateScreen();
-	
+
 			try {
 				endTime = System.currentTimeMillis();
 				long restzeit = 25 - (endTime - startTime);
@@ -96,6 +100,14 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 		}
 	}
 
+	private void detectCollision() {
+		// TODO Auto-generated method stub
+
+	}
+
 	private void moveObjects() {
+		for (num = 0; num < player.size; num++) {
+			moveSpaceship(player.get(num));
+		}
 	}
 }
