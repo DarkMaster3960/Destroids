@@ -2,10 +2,12 @@ package Game;
 
 import java.applet.Applet;
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.util.Arrays;
 
 public class DestroidsGame extends Applet implements Runnable, KeyListener {
 
@@ -15,8 +17,9 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 	// Schalter für Spielvorhergang
 	boolean continuing;
 
-	Image spielfeld;
-	Graphics spielGraphics;
+
+	BufferedImage spielfeld;
+	Graphics2D spielGraphics;
 	long startTime, endTime;
 	private static final long serialVersionUID = 2940828202128306011L;
 	Thread th;
@@ -28,10 +31,12 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 		}
 		setIgnoreRepaint(true);
 		ViewBean.setAuflösung(getSize());
-		spielfeld = createImage(getWidth(), getHeight());
-		spielGraphics = spielfeld.getGraphics();
+		spielfeld = new BufferedImage(getWidth(), getHeight(),
+				BufferedImage.TYPE_INT_RGB);
+		spielGraphics = (Graphics2D) spielfeld.getGraphics();
 		ViewBean.setSpielfeldGraphics(spielGraphics);
 		ViewBean.setPlayer1(new Spaceship());
+		ViewBean.setPlayer2(new Spaceship());
 		addKeyListener(this);
 		updateScreen();
 	}
@@ -40,19 +45,54 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 	}
 
 	public void keyReleased(KeyEvent e) {
+		Spaceship spaceship1 = ViewBean.getPlayer1();
+		Spaceship spaceship2 = ViewBean.getPlayer2();
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			spaceship1.vorwaerts = false;
+		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			spaceship1.rueckwarts = false;
+		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			spaceship1.links = false;
+		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			spaceship1.rechts = false;
+		}
+		if (spaceship2 != null) {
+			if (e.getKeyCode() == KeyEvent.VK_W) {
+				spaceship2.vorwaerts = false;
+			} else if (e.getKeyCode() == KeyEvent.VK_S) {
+				spaceship2.rueckwarts = false;
+			} else if (e.getKeyCode() == KeyEvent.VK_A) {
+				spaceship2.links = false;
+			} else if (e.getKeyCode() == KeyEvent.VK_D) {
+				spaceship2.rechts = false;
+			}
+		}
 	}
 
 	public void keyPressed(KeyEvent e) {
-		Spaceship spaceship = ViewBean.getPlayer1();
+		Spaceship spaceship1 = ViewBean.getPlayer1();
+		Spaceship spaceship2 = ViewBean.getPlayer2();
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			spaceship.move(0, -2);
+			spaceship1.vorwaerts = true;
 		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			spaceship.move(0, 2);
+			spaceship1.rueckwarts = true;
 		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			spaceship.move(-2, 0);
+			spaceship1.links = true;
 		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			spaceship.move(+2, 0);
+			spaceship1.rechts = true;
 		}
+		if (spaceship2 != null) {
+			if (e.getKeyCode() == KeyEvent.VK_W) {
+				spaceship2.vorwaerts = true;
+			} else if (e.getKeyCode() == KeyEvent.VK_S) {
+				spaceship2.rueckwarts = true;
+			} else if (e.getKeyCode() == KeyEvent.VK_A) {
+				spaceship2.links = true;
+			} else if (e.getKeyCode() == KeyEvent.VK_D) {
+				spaceship2.rechts = true;
+			}
+		}
+
 	}
 
 	public void start() {
@@ -63,15 +103,20 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 	}
 
 	public void drawBufferedImage() {
-		spielGraphics.setColor(Color.BLACK);
+		spielGraphics.setColor(Color.black);
 		spielGraphics.fillRect(0, 0, (int) ViewBean.getAuflösung().getWidth(),
 				(int) ViewBean.getAuflösung().getHeight());
-		ViewBean.getPlayer1().paint();
+		if (ViewBean.getPlayer1() != null) {
+			ViewBean.getPlayer1().paint();
+		}
+		if (ViewBean.getPlayer2() != null) {
+			ViewBean.getPlayer2().paint();
+		}
 	}
 
 	public void updateScreen() {
 		drawBufferedImage();
-		Graphics g = getGraphics();
+		Graphics2D g = (Graphics2D) getGraphics();
 		if (g != null) {
 			if (spielfeld != null) {
 				g.drawImage(spielfeld, 0, 0, null);
@@ -82,16 +127,16 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 	public void run() {
 		while (continuing) {
 			startTime = System.currentTimeMillis();
-			// 1. Move Objects to next Position
-			moveObjects();
-			// 2. Check collision
-			detectCollision();
-			// 3. Repaint the graphics
+			// 1. Repaint the graphics
 			updateScreen();
-
+			// 2. Move Objects to next Position
+			moveObjects();
+			// 3. Check collision
+			detectCollision();
+		
 			try {
 				endTime = System.currentTimeMillis();
-				long restzeit = 25 - (endTime - startTime);
+				long restzeit = ViewBean.getFramerate() - (endTime - startTime);
 				if (restzeit > 0) {
 					Thread.sleep(restzeit);
 				}
@@ -106,8 +151,11 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 	}
 
 	private void moveObjects() {
-		for (num = 0; num < player.size; num++) {
-			moveSpaceship(player.get(num));
+		if (ViewBean.getPlayer1() != null) {
+			ViewBean.getPlayer1().aktualisiereBewegung();
+		}
+		if (ViewBean.getPlayer2() != null) {
+			ViewBean.getPlayer2().aktualisiereBewegung();
 		}
 	}
 }
