@@ -6,11 +6,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
-// SVN Test trial
 public abstract class MovableObject {
-	public void paint() {
-
-	}
+	public abstract void paint();
 
 	/**
 	 * macht eine Farbe in einem Bild durchsichtig
