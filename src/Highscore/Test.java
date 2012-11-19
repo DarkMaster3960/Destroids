@@ -11,6 +11,7 @@ public class Test {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Highscore.saveHighscore("Test", 1000);
+		Highscore.saveHighscore("Stephan", 1337);
 		ResultSet rs = Highscore.readHighscores();
 		
 		try {			
