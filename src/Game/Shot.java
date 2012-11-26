@@ -13,7 +13,7 @@ public class Shot extends MovableObject {
 	private double y;
 	private final static int length = 3;
 	private int degree;
-	private static int lifetime = 10;
+	private static int lifetime = 20;
 	
 	public Shot(double x, double y, int degree) {
 		this.x = x;
@@ -52,6 +52,7 @@ public class Shot extends MovableObject {
 	public void aktualisiereBewegung() {
 		x += length * Math.cos(degree);
 		y += length * Math.cos(degree);
+		lifetime--;
 	}
 
 	public void paint() {
