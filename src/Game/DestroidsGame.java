@@ -42,13 +42,6 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 	}
 
 	public void keyTyped(KeyEvent e) {
-		Spaceship spaceship1 = ViewBean.getPlayer1();
-		Spaceship spaceship2 = ViewBean.getPlayer2();
-		if (e.getKeyCode() == KeyEvent.VK_L) {
-			System.out.println("C");
-			ViewBean.addShot(new Shot(spaceship1.getX(), spaceship1.getY(),
-					spaceship1.getAktRotation()));
-		}
 	}
 
 	public void keyReleased(KeyEvent e) {
@@ -73,6 +66,11 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 			} else if (e.getKeyCode() == KeyEvent.VK_D) {
 				spaceship2.rechts = false;
 			}
+		}
+		
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			ViewBean.addShot(new Shot(spaceship1.getX(), spaceship1.getY(),
+					spaceship1.getAktRotation()));
 		}
 	}
 
