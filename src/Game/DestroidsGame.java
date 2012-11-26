@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DestroidsGame extends Applet implements Runnable, KeyListener {
@@ -16,7 +17,6 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 	 */
 	// Schalter für Spielvorhergang
 	boolean continuing;
-
 
 	BufferedImage spielfeld;
 	Graphics2D spielGraphics;
@@ -44,10 +44,10 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 	public void keyTyped(KeyEvent e) {
 		Spaceship spaceship1 = ViewBean.getPlayer1();
 		Spaceship spaceship2 = ViewBean.getPlayer2();
-		
-		if(e.getKeyCode() == KeyEvent.VK_NUMPAD0) {
-			
-			ViewBean.addShot(new Shot(spaceship1.getX(), spaceship1.getY(), spaceship1.getAktRotation()));
+		if (e.getKeyCode() == KeyEvent.VK_L) {
+			System.out.println("C");
+			ViewBean.addShot(new Shot(spaceship1.getX(), spaceship1.getY(),
+					spaceship1.getAktRotation()));
 		}
 	}
 
@@ -119,6 +119,14 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 		if (ViewBean.getPlayer2() != null) {
 			ViewBean.getPlayer2().paint();
 		}
+		ArrayList<Shot> shots = ViewBean.getShots();
+		if (!shots.isEmpty()) {
+			System.out.println("A");
+			for (Shot shot : shots) {
+				System.out.println("B");
+				shot.paint();
+			}
+		}
 	}
 
 	public void updateScreen() {
@@ -140,7 +148,7 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 			moveObjects();
 			// 3. Check collision
 			detectCollision();
-		
+
 			try {
 				endTime = System.currentTimeMillis();
 				long restzeit = ViewBean.getFramerate() - (endTime - startTime);
@@ -163,6 +171,12 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 		}
 		if (ViewBean.getPlayer2() != null) {
 			ViewBean.getPlayer2().aktualisiereBewegung();
+		}
+		ArrayList<Shot> shots = ViewBean.getShots();
+		if (!shots.isEmpty()) {
+			for (Shot shot : shots) {
+				shot.aktualisiereBewegung();
+			}
 		}
 	}
 }

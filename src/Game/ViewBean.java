@@ -13,7 +13,7 @@ public class ViewBean {
 
 	private static Spaceship player2;
 	
-	private static ArrayList<Shot> shots;
+	private static ArrayList<Shot> shots = new ArrayList<Shot>();
 	
 	private static final int FRAMERATE = 20;
 

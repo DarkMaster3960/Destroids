@@ -1,5 +1,6 @@
 package Game;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 import MovableObject.MovableObject;
@@ -56,6 +57,8 @@ public class Shot extends MovableObject {
 	public void paint() {
 		if (ViewBean.getSpielfeldGraphics() != null) {
 			Graphics2D spielfeldGraphic = ViewBean.getSpielfeldGraphics();
+			spielfeldGraphic.setColor(Color.GREEN);
+			System.out.println("X: " + x + " Y: " + y);
 			if (spielfeldGraphic != null) {
 				spielfeldGraphic.fillOval((int)(x-0.5), (int)(y-0.5), length, length);
 				
