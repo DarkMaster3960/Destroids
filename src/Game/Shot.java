@@ -50,8 +50,8 @@ public class Shot extends MovableObject {
 	}
 	
 	public void aktualisiereBewegung() {
-		x += length * Math.cos(degree);
-		y += length * Math.cos(degree);
+		x += length * Math.cos(Math.toRadians(degree));
+		y += length * Math.cos(Math.toRadians(degree));
 		lifetime--;
 	}
 
