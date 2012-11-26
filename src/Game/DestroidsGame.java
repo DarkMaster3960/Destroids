@@ -159,8 +159,19 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 	}
 
 	private void detectCollision() {
-		// TODO Auto-generated method stub
+		Spaceship player1 = ViewBean.getPlayer1();
+		Graphics2D player1graphics = player1.getObjectGraphics();
+		Spaceship player2 = ViewBean.getPlayer2();
+		Graphics2D player2graphics = player2.getObjectGraphics();
+		if(player1graphics.hit(player2graphics.getClipBounds(), player2graphics.getClip(), true)){
+			continuing = false;
+			addExplosion(player1.getX(),player1.getY());
+			addExplosion(player2.getX(),player2.getY());
+		}
 
+	}
+	private void addExplosion(double d, double e){
+		
 	}
 
 	private void moveObjects() {

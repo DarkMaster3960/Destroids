@@ -58,6 +58,9 @@ public class Spaceship extends MovableObject {
 	public void setY(double y) {
 		this.y = y;
 	}
+	public Graphics2D getObjectGraphics(){
+		return (Graphics2D) ship.getGraphics();
+	}
 
 	private void speedUp() {
 		if ((beschleunigungen[aktRotation] + BESCHLEUNIGUNGSRATE) > 100) {
