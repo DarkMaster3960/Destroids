@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class ViewBean {
 	
@@ -13,14 +15,14 @@ public class ViewBean {
 
 	private static Spaceship player2;
 	
-	private static ArrayList<Shot> shots = new ArrayList<Shot>();
+	private static List<Shot> shots = Collections.synchronizedList(new ArrayList<Shot>());
 	
 	private static final int FRAMERATE = 20;
 
 	private static Dimension auflösung = new Dimension();
 	
 	public synchronized static ArrayList<Shot> getShots() {
-		return shots;
+		return (ArrayList<Shot>) shots;
 	}
 	
 	public synchronized static void addShot(Shot shot) {
