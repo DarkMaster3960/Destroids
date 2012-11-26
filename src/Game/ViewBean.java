@@ -3,6 +3,7 @@ package Game;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 public class ViewBean {
 	
@@ -12,9 +13,19 @@ public class ViewBean {
 
 	private static Spaceship player2;
 	
+	private static ArrayList<Shot> shots;
+	
 	private static final int FRAMERATE = 20;
 
 	private static Dimension auflösung = new Dimension();
+	
+	public ArrayList<Shot> getShots() {
+		return shots;
+	}
+	
+	public void addShot(Shot shot) {
+		shots.add(shot);
+	}
 
 	public static Dimension getAuflösung() {
 		return auflösung;
