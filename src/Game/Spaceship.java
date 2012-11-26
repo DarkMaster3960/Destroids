@@ -23,9 +23,13 @@ public class Spaceship extends MovableObject {
 	private double x = ViewBean.getAuflösung().width / 2;
 	private double y = ViewBean.getAuflösung().height / 2;
 
-	public Spaceship() {
+	public Spaceship(int player) {
 		try {
-			ship = ImageIO.read(new File("Images/SkyPod.jpg"));
+			if (player == 1) {
+				ship = ImageIO.read(new File("Images/SkyPodRed.jpg"));
+			} else {
+				ship = ImageIO.read(new File("Images/SkyPodGreen.jpg"));
+			}
 			ship = getScaledImage(ship, 5);
 			ship = setTranslucentColor(ship, Color.black);
 
@@ -33,6 +37,22 @@ public class Spaceship extends MovableObject {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public void setY(double y) {
+		this.y = y;
 	}
 
 	private void speedUp() {

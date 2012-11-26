@@ -35,8 +35,8 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 				BufferedImage.TYPE_INT_RGB);
 		spielGraphics = (Graphics2D) spielfeld.getGraphics();
 		ViewBean.setSpielfeldGraphics(spielGraphics);
-		ViewBean.setPlayer1(new Spaceship());
-		ViewBean.setPlayer2(new Spaceship());
+		ViewBean.setPlayer1(new Spaceship(1));
+		ViewBean.setPlayer2(new Spaceship(2));
 		addKeyListener(this);
 		updateScreen();
 	}
