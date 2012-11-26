@@ -186,7 +186,7 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 		if (ViewBean.getPlayer2() != null) {
 			ViewBean.getPlayer2().aktualisiereBewegung();
 		}
-		sList<Shot> shots = ViewBean.getShots();
+		List<Shot> shots = ViewBean.getShots();
 		if (!shots.isEmpty()) {
 			for (Shot shot : shots) {
 				shot.aktualisiereBewegung();
