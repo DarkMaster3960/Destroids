@@ -39,6 +39,10 @@ public class Spaceship extends MovableObject {
 		}
 	}
 
+	public int getAktRotation() {
+		return aktRotation;
+	}
+
 	public double getX() {
 		return x;
 	}

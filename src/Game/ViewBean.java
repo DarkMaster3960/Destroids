@@ -19,11 +19,11 @@ public class ViewBean {
 
 	private static Dimension auflösung = new Dimension();
 	
-	public ArrayList<Shot> getShots() {
+	public static ArrayList<Shot> getShots() {
 		return shots;
 	}
 	
-	public void addShot(Shot shot) {
+	public static void addShot(Shot shot) {
 		shots.add(shot);
 	}
 

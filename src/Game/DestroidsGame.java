@@ -42,6 +42,13 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 	}
 
 	public void keyTyped(KeyEvent e) {
+		Spaceship spaceship1 = ViewBean.getPlayer1();
+		Spaceship spaceship2 = ViewBean.getPlayer2();
+		
+		if(e.getKeyCode() == KeyEvent.VK_NUMPAD0) {
+			
+			ViewBean.addShot(new Shot(spaceship1.getX(), spaceship1.getY(), spaceship1.getAktRotation()));
+		}
 	}
 
 	public void keyReleased(KeyEvent e) {
