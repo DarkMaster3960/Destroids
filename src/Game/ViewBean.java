@@ -21,8 +21,8 @@ public class ViewBean {
 
 	private static Dimension auflösung = new Dimension();
 	
-	public synchronized static ArrayList<Shot> getShots() {
-		return (ArrayList<Shot>) shots;
+	public synchronized static List<Shot> getShots() {
+		return  shots;
 	}
 	
 	public synchronized static void addShot(Shot shot) {

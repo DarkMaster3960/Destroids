@@ -11,6 +11,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class DestroidsGame extends Applet implements Runnable, KeyListener {
 
@@ -119,7 +120,7 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 		if (ViewBean.getPlayer2() != null) {
 			ViewBean.getPlayer2().paint();
 		}
-		ArrayList<Shot> shots = ViewBean.getShots();
+		List<Shot> shots = ViewBean.getShots();
 		if (!shots.isEmpty()) {
 			System.out.println("A");
 			for (Shot shot : shots) {
@@ -185,7 +186,7 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 		if (ViewBean.getPlayer2() != null) {
 			ViewBean.getPlayer2().aktualisiereBewegung();
 		}
-		ArrayList<Shot> shots = ViewBean.getShots();
+		sList<Shot> shots = ViewBean.getShots();
 		if (!shots.isEmpty()) {
 			for (Shot shot : shots) {
 				shot.aktualisiereBewegung();
