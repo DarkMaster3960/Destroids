@@ -20,10 +20,12 @@ public class Spaceship extends MovableObject {
 
 	public double[] beschleunigungen = new double[360];
 	private int aktRotation = 0;
-	private double x = ViewBean.getAuflösung().width / 2;
-	private double y = ViewBean.getAuflösung().height / 2;
-
-	public Spaceship(int player) {
+	private double x;
+	private double y;
+			
+	public Spaceship(int player, double x, double y) {
+		this.x=x;
+		this.y=y;
 		try {
 			if (player == 1) {
 				ship = ImageIO.read(new File("Images/SkyPodRed.jpg"));

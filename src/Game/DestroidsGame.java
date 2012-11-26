@@ -3,6 +3,8 @@ package Game;
 import java.applet.Applet;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
@@ -35,8 +37,8 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 				BufferedImage.TYPE_INT_RGB);
 		spielGraphics = (Graphics2D) spielfeld.getGraphics();
 		ViewBean.setSpielfeldGraphics(spielGraphics);
-		ViewBean.setPlayer1(new Spaceship(1));
-		ViewBean.setPlayer2(new Spaceship(2));
+		ViewBean.setPlayer1(new Spaceship(1,ViewBean.getAuflösung().width / 2,ViewBean.getAuflösung().height / 2));
+		ViewBean.setPlayer2(new Spaceship(2,ViewBean.getAuflösung().width / 3,ViewBean.getAuflösung().height / 3+20));
 		addKeyListener(this);
 		updateScreen();
 	}
@@ -145,7 +147,7 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 			// 2. Move Objects to next Position
 			moveObjects();
 			// 3. Check collision
-			detectCollision();
+			//detectCollision();
 
 			try {
 				endTime = System.currentTimeMillis();
@@ -163,7 +165,9 @@ public class DestroidsGame extends Applet implements Runnable, KeyListener {
 		Graphics2D player1graphics = player1.getObjectGraphics();
 		Spaceship player2 = ViewBean.getPlayer2();
 		Graphics2D player2graphics = player2.getObjectGraphics();
-		if(player1graphics.hit(player2graphics.getClipBounds(), player2graphics.getClip(), true)){
+		Shape player2shape = player2graphics.getClip();
+		Rectangle player2rec = player2graphics.getClipBounds();
+		if(player1graphics.hit( null,null , true)){
 			continuing = false;
 			addExplosion(player1.getX(),player1.getY());
 			addExplosion(player2.getX(),player2.getY());
